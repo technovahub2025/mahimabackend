@@ -72,6 +72,15 @@ const getProducts = async (req, res) => {
       },
      
      
+       {
+  _id: "3",
+  name: "Tuni Breads",
+  description: "Fresh whole wheat bread",
+  price: 40,
+  rating: 4.5,
+  category: "Bakery",
+  image: "https://i.ibb.co/Lh0wt4GF/Screenshot-2026-06-17-174118.png",
+}
     
     ];
 
