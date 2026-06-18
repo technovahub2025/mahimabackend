@@ -17,6 +17,10 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => {
+  res.status(200).send("Mahima backend is running");
+});
+
 app.use("/api", require("./route/route"));
 
 mongoose
