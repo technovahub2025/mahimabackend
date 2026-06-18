@@ -20,7 +20,7 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.status(200).send("Mahima backend is running");
+  res.status(200).json({ message: "Mahima backend is running" });
 });
 
 app.use("/api", require("./route/route"));
@@ -28,7 +28,7 @@ app.use("/api", require("./route/route"));
 
 
 app.get("/api/health", (req, res) => {
-  res.status(200).send("OK");
+  res.status(200).json({ status: "OK" });
 });
 
 
