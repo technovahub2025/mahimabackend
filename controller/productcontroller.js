@@ -78,7 +78,9 @@ const getProducts = async (req, res) => {
   description: "Fresh whole wheat bread",
   price: 40,
   rating: 4.5,
-  category: "Bakery",
+  category: " Tuni Signature Bread  India's first Coconut Milk & Butter Bread, crafted for a softer texture and richer taste. Made without trans fats, vanaspati, or added preservatives, it delivers premium quality and freshness in every slice.Refined Wheat flour, Coconut milk, with Butter. Without preservatives. Tuni Whole Wheat Bread Made with Whole Wheat, Coconut Milk, Butter, Honey, and Dates, this nutrient-rich bread combines fiber, protein, and natural goodness with exceptional taste. Free from trans fats, vanaspati, and added preservatives, it's wholesome nutrition for everyday enjoyment. Whole Wheat flour, Butter, Coconut milk, Dates,and honey.No preservatives.",
+
+
   image: "https://i.ibb.co/Lh0wt4GF/Screenshot-2026-06-17-174118.png",
 }
     
