@@ -10,6 +10,8 @@ const app = express();
 app.use(express.json());
 
 app.use(
+
+
   cors({
     origin: "*",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
@@ -22,6 +24,16 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", require("./route/route"));
+
+
+
+app.get("/api/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
+
+
+
 
 mongoose
   .connect(process.env.MONGO_URI)
