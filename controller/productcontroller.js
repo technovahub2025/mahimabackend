@@ -52,26 +52,83 @@ const createProduct = async (req, res) => {
 const getProducts = async (req, res) => {
   try {
     const products = [
-      {
-        _id: "1",
-        productName: "Wheat Bread",
-        description: "Fresh whole wheat bread",
-        price: 40,
-        rating: 4.5,
-        category: "Bread",
-        image:
-          "https://res.cloudinary.com/dlepujzgc/image/upload/f_auto,q_auto/wheatbread_zn8qtf",
-      },
-      {
-        _id: "2",
-        productName: "White Bread",
-        description: "Fresh soft white bread",
-        price: 35,
-        rating: 4.7,
-        category: "Bread",
-        image:
-          "https://res.cloudinary.com/dlepujzgc/image/upload/v1782214135/white_bread_alb0xp.jpg",
-      },
+      {
+
+
+
+        _id: "1",
+
+
+
+        productName: "Wheat Bread",
+
+
+
+        description: "Fresh whole wheat bread",
+
+
+
+        price: 40,
+
+
+
+        rating: 4.5,
+
+
+
+        category: "Bread",
+
+
+
+        image:
+
+
+
+          "https://i.pinimg.com/1200x/12/d8/15/12d815e8f5bbbbddd129fe8f17827e79.jpg",
+
+
+
+      },
+
+
+
+      {
+
+
+
+        _id: "2",
+
+
+
+        productName: "White Bread",
+
+
+
+        description: "Fresh soft white bread",
+
+
+
+        price: 35,
+
+
+
+        rating: 4.7,
+
+
+
+        category: "Bread",
+
+
+
+        image:
+
+
+
+          "https://i.pinimg.com/1200x/9c/66/b6/9c66b6bcaa032034b7913f688c9b333b.jpg",
+
+
+
+      },
     ];
 
     res.status(200).json({
