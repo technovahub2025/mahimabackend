@@ -82,9 +82,7 @@ const getProducts = async (req, res) => {
 
         image:
 
-
-
-          "https://i.pinimg.com/1200x/12/d8/15/12d815e8f5bbbbddd129fe8f17827e79.jpg",
+"https://i.pinimg.com/736x/48/20/4e/48204eef2b5aebc8d9895314d06ec601.jpg",
 
 
 
