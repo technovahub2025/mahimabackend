@@ -124,8 +124,7 @@ const getProducts = async (req, res) => {
 
 
 
-          "https://i.pinimg.com/1200x/9c/66/b6/9c66b6bcaa032034b7913f688c9b333b.jpg",
-
+          "https://i.pinimg.com/1200x/8b/29/54/8b29544b31b3093fcd151562d3382270.jpg",
 
 
       },
