@@ -82,7 +82,7 @@ const getProducts = async (req, res) => {
 
         image:
 
-"https://cdn.phototourl.com/free/2026-09-08-ef263624-a522-4e73-85af-97d286c830f0.jpg",
+"https://cdn.phototourl.com/free/2026-09-09-a2ba6e73-4b73-47b5-a98d-00257d9c2c97.jpg",
 
 
 
@@ -122,7 +122,7 @@ const getProducts = async (req, res) => {
 
 
 
-          "https://cdn.phototourl.com/free/2026-09-08-ec2c7c61-cd01-4c37-8371-b6b9b1136f00.jpg",
+          "https://cdn.phototourl.com/free/2026-09-09-5df1e17a-680c-4e63-97a6-b32b627dac1a.jpg",
 
 
       },
