@@ -72,7 +72,7 @@ const getProducts = async (req, res) => {
 
 
 
-        rating: 4.5,
+        rating: 4.9,
 
 
 
@@ -110,7 +110,7 @@ const getProducts = async (req, res) => {
 
 
 
-        rating: 4.7,
+        rating: 4.8,
 
 
 
