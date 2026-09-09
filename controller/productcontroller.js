@@ -68,7 +68,7 @@ const getProducts = async (req, res) => {
 
 
 
-        price: 40,
+        price: 160,
 
 
 
@@ -106,7 +106,7 @@ const getProducts = async (req, res) => {
 
 
 
-        price: 35,
+        price: 110,
 
 
 
