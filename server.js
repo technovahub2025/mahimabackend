@@ -35,13 +35,26 @@ app.get("/api/health", (req, res) => {
 
 
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
-
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const startServer = async () => {
+  if (!process.env.MONGODB_URI) {
+    console.error("MONGODB_URI is required. Set it in .env or the server environment.");
+    process.exitCode = 1;
+    return;
+  }
+
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("MongoDB Connected");
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("MongoDB connection failed. Check MONGO_URI and database connectivity.");
+    await mongoose.disconnect();
+    process.exitCode = 1;
+  }
+};
+
+startServer();
