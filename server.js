@@ -27,7 +27,6 @@ app.get("/api/health", (req, res) => {
   res.status(200).json({ status: "OK" });
 });
 
-<<<<<<< HEAD
 const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
@@ -40,41 +39,13 @@ const startServer = async () => {
 
     console.log("MongoDB Connected");
 
-=======
-
-
-
-
-const PORT = process.env.PORT || 5000;
-
-const startServer = async () => {
-  if (!process.env.MONGODB_URI) {
-    console.error("MONGODB_URI is required. Set it in .env or the server environment.");
-    process.exitCode = 1;
-    return;
-  }
-
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("MongoDB Connected");
->>>>>>> 41f80dd09b8a3df2e5b643266e67a7fe0146e085
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
   } catch (error) {
-<<<<<<< HEAD
     console.error("MongoDB connection failed:", error.message);
     process.exit(1);
   }
 };
 
 startServer();
-=======
-    console.error("MongoDB connection failed. Check MONGO_URI and database connectivity.");
-    await mongoose.disconnect();
-    process.exitCode = 1;
-  }
-};
-
-startServer();
->>>>>>> 41f80dd09b8a3df2e5b643266e67a7fe0146e085
