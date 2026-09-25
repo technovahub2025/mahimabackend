@@ -6,18 +6,31 @@ const normalizeQuantity = (quantity) => {
 };
 
 const getCartId = (req) =>
-  String(req.body?.cartId || req.query?.cartId || req.headers["x-cart-id"] || "default");
+  String(
+    req.body?.cartId ||
+      req.query?.cartId ||
+      req.headers["x-cart-id"] ||
+      "default"
+  );
 
 const getCartSummary = (cart) => {
   const items = cart?.items || [];
 
-  const totalQuantity = items.reduce((sum, item) => sum + item.quantity, 0);
+  const totalQuantity = items.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
+
   const totalAmount = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
 
-  return { items, totalQuantity, totalAmount };
+  return {
+    items,
+    totalQuantity,
+    totalAmount,
+  };
 };
 
 const validateProductPayload = (body) => {
@@ -30,13 +43,18 @@ const validateProductPayload = (body) => {
   return null;
 };
 
+// --------------------------------------------------
+// ADD TO CART
+// --------------------------------------------------
 const addToCart = async (req, res) => {
   try {
     const cartId = getCartId(req);
     const validationError = validateProductPayload(req.body);
 
     if (validationError) {
-      return res.status(400).json({ message: validationError });
+      return res.status(400).json({
+        message: validationError,
+      });
     }
 
     const {
@@ -51,7 +69,7 @@ const addToCart = async (req, res) => {
 
     const quantity = normalizeQuantity(req.body.quantity);
 
-    let cart = await Cart.findOne({ cartId });
+    let cart = await Cart.findOne({ cartId }).maxTimeMS(10000);
 
     if (!cart) {
       cart = new Cart({
@@ -92,21 +110,28 @@ const addToCart = async (req, res) => {
 
     await cart.save();
 
-    const summary = getCartSummary(cart);
-
     res.status(200).json({
       message: "Added to cart",
-      cart: summary,
+      cart: getCartSummary(cart),
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Add to cart error:", error);
+
+    res.status(500).json({
+      message: "Unable to add item to cart",
+      error: error.message,
+    });
   }
 };
 
+// --------------------------------------------------
+// GET CART
+// --------------------------------------------------
 const getCart = async (req, res) => {
   try {
     const cartId = getCartId(req);
-    const cart = await Cart.findOne({ cartId });
+
+    const cart = await Cart.findOne({ cartId }).maxTimeMS(10000);
 
     if (!cart) {
       return res.status(200).json({
@@ -124,26 +149,41 @@ const getCart = async (req, res) => {
       cart: getCartSummary(cart),
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Get cart error:", error);
+
+    res.status(500).json({
+      message: "Unable to fetch cart",
+      error: error.message,
+    });
   }
 };
 
+// --------------------------------------------------
+// UPDATE CART ITEM
+// --------------------------------------------------
 const updateCartItem = async (req, res) => {
   try {
     const cartId = getCartId(req);
     const { productId } = req.params;
+
     const quantity = normalizeQuantity(req.body.quantity);
 
-    const cart = await Cart.findOne({ cartId });
+    const cart = await Cart.findOne({ cartId }).maxTimeMS(10000);
 
     if (!cart) {
-      return res.status(404).json({ message: "Cart not found" });
+      return res.status(404).json({
+        message: "Cart not found",
+      });
     }
 
-    const item = cart.items.find((entry) => entry.productId === String(productId));
+    const item = cart.items.find(
+      (entry) => entry.productId === String(productId)
+    );
 
     if (!item) {
-      return res.status(404).json({ message: "Cart item not found" });
+      return res.status(404).json({
+        message: "Cart item not found",
+      });
     }
 
     item.quantity = quantity;
@@ -155,19 +195,29 @@ const updateCartItem = async (req, res) => {
       cart: getCartSummary(cart),
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Update cart error:", error);
+
+    res.status(500).json({
+      message: "Unable to update cart",
+      error: error.message,
+    });
   }
 };
 
+// --------------------------------------------------
+// REMOVE FROM CART
+// --------------------------------------------------
 const removeFromCart = async (req, res) => {
   try {
     const cartId = getCartId(req);
     const { productId } = req.params;
 
-    const cart = await Cart.findOne({ cartId });
+    const cart = await Cart.findOne({ cartId }).maxTimeMS(10000);
 
     if (!cart) {
-      return res.status(404).json({ message: "Cart not found" });
+      return res.status(404).json({
+        message: "Cart not found",
+      });
     }
 
     cart.items = cart.items.filter(
@@ -181,15 +231,23 @@ const removeFromCart = async (req, res) => {
       cart: getCartSummary(cart),
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Remove cart error:", error);
+
+    res.status(500).json({
+      message: "Unable to remove cart item",
+      error: error.message,
+    });
   }
 };
 
+// --------------------------------------------------
+// CLEAR CART
+// --------------------------------------------------
 const clearCart = async (req, res) => {
   try {
     const cartId = getCartId(req);
 
-    await Cart.findOneAndDelete({ cartId });
+    await Cart.findOneAndDelete({ cartId }).maxTimeMS(10000);
 
     res.status(200).json({
       message: "Cart cleared",
@@ -200,7 +258,12 @@ const clearCart = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Clear cart error:", error);
+
+    res.status(500).json({
+      message: "Unable to clear cart",
+      error: error.message,
+    });
   }
 };
 
